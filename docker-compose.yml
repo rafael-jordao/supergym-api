@@ -2,11 +2,16 @@ version: '3'
 
 services:
   app:
-    build: .
+    build:
+      context: .
+      args:
+        - POSTGRES_HOST=supergym_db
+        - POSTGRES_PWD=password
     container_name: api_supergym
     command: yarn dev
     ports:
       - "3000:3000"
+      - "5555:5555"
     volumes:
       - .:/usr/app
     depends_on:
