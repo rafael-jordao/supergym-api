@@ -22,16 +22,31 @@ jobs:
           node-version: 14.x
 
       - name: Install dependencies
-        run: |
-          yarn install
-          docker-compose run --rm app yarn install
+        run: yarn install
+
+      - name: Up Containers
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: supergym_db
+          DATABASE_URL: postgresql://postgres:password@supergym_db:5432/supergym_db?schema=public
+        run: docker-compose up -d
+          
+      - name: Migrations
+        run: docker exec -i api_supergym sh -c "yarn prisma migrate dev"
 
       - name: Test
-        run: |
-          docker-compose up -d
-          docker-compose exec -it app sh -c "yarn test"
         env:
           CI: true
+        run: docker exec -i api_supergym sh -c "yarn test"
+        
+      - name: Containers logs
+        run: docker-compose logs
 
       - name: Stop services
         run: docker-compose down
+
+
+
+
+      

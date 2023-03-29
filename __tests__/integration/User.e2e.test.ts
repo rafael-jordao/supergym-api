@@ -18,8 +18,8 @@ afterAll(async () => {
 describe('/users', () => {
   it('Should be able to create a new user', async () => {
     const payload = {
-      'name': 'JohnDoe',
-      'email': 'johndoe@user.com',
+      'name': 'test100',
+      'email': 'test100@user.com',
       'password': 'password'
     };
 
@@ -33,8 +33,8 @@ describe('/users', () => {
 
   it('Should not be able to create a new user', async () => {
     const payload = {
-      'name': 'JohnDoe',
-      'email': 'rafaeljordao.picado@gmail.com',
+      'name': 'test',
+      'email': 'test100@user.com',
       'password': 'password'
     };
 
