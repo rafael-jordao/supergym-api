@@ -33,7 +33,7 @@ jobs:
         run: docker-compose up -d
           
       - name: Migrations
-        run: docker-compose exec -it app sh -c yarn prisma migrate dev
+        run: docker exec -it app sh -c yarn prisma migrate dev
 
       - name: Test
         env:
