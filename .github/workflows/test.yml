@@ -35,11 +35,10 @@ jobs:
       - name: Migrations
         run: docker exec -i api_supergym sh -c "yarn prisma migrate dev"
 
-
       - name: Test
         env:
           CI: true
-        run: yarn test
+        run: docker exec -i api_supergym sh -c "yarn test"
         
       - name: Containers logs
         run: docker-compose logs
