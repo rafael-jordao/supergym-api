@@ -33,7 +33,7 @@ jobs:
         run: docker-compose up -d
           
       - name: Migrations
-        run: docker exec -it -T api_supergym sh -c "yarn prisma migrate dev"
+        run: docker exec -i api_supergym sh -c "yarn prisma migrate dev"
 
 
       - name: Test
