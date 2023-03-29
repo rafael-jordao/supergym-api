@@ -34,7 +34,7 @@ describe('/users', () => {
   it('Should not be able to create a new user', async () => {
     const payload = {
       'name': 'test',
-      'email': 'test1@user.com',
+      'email': 'test5@user.com',
       'password': 'password'
     };
 
