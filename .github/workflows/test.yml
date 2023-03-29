@@ -39,10 +39,10 @@ jobs:
  
         env:
           CI: true
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: password
-          POSTGRES_DB: supergym_db
-          DATABASE_URL: postgresql://postgres:password@supergym_db:5432/supergym_db?schema=public
+          POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+          POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
       - name: Stop services
         run: docker-compose down
