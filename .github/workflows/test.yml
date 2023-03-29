@@ -22,14 +22,15 @@ jobs:
           node-version: 14.x
 
       - name: Install dependencies
-        run: |
-          yarn install
-          docker-compose run --rm app yarn install
+        run:  yarn install
+
+      - name: Run containers
+        run:  docker compose up
 
       - name: Test
         run: |
-          docker-compose up 
           docker-compose exec -it app sh -c "yarn test"
+ 
         env:
           CI: true
           DB_HOST: supergym_db
