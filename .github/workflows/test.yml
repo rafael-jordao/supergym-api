@@ -31,7 +31,7 @@ jobs:
           POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: |
-          docker-compose up
+          docker-compose up -d
           docker-compose exec -it app sh -c "yarn prisma migrate dev"
 
       - name: Test
@@ -40,7 +40,8 @@ jobs:
         run: |
           docker-compose exec -it app sh -c "yarn test"
         
-        
+      - name: Containers logs
+        run: docker-compose logs
 
       - name: Stop services
         run: docker-compose down
