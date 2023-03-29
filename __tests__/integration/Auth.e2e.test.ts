@@ -18,7 +18,7 @@ afterAll(async () => {
 describe('/auth', () => {
   it('Should be able to authenticate a user', async () => {
     const payload = {
-      'email': 'johndoe@user.com',
+      'email': 'test@user.com',
       'password': 'password'
     };
 
@@ -30,7 +30,7 @@ describe('/auth', () => {
 
   it('Should not be able to authenticate a user', async () => {
     const payload = {
-      'email': 'johndoe@user.com',
+      'email': 'test@user.com',
       'password': 'wrongpassword'
     };
 

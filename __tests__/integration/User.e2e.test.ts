@@ -18,8 +18,8 @@ afterAll(async () => {
 describe('/users', () => {
   it('Should be able to create a new user', async () => {
     const payload = {
-      'name': 'test2',
-      'email': 'test2@user.com',
+      'name': 'test100',
+      'email': 'test100@user.com',
       'password': 'password'
     };
 
