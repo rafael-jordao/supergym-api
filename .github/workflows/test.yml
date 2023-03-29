@@ -24,6 +24,12 @@ jobs:
       - name: Install dependencies
         run:  yarn install
 
+      - name: binatryTargets prisma
+        run:  yarn prisma generate
+
+      - name: Sync Database
+        run:  yarn prisma migrate dev
+
       - name: Run containers
         run:  docker compose up
 
