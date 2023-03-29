@@ -25,11 +25,7 @@ jobs:
         run: yarn install
 
       - name: Up Containers
-        env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: password
-          POSTGRES_DB: supergym_db
-          DATABASE_URL: postgresql://postgres:password@supergym_db:5432/supergym_db?schema=public
+        environment: Database
         run: docker-compose up -d
           
       - name: Migrations
