@@ -11,6 +11,7 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    environment: Database
 
     steps:
       - name: Checkout code
@@ -25,7 +26,11 @@ jobs:
         run: yarn install
 
       - name: Up Containers
-        environment: Database
+        env:
+          POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+          POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: docker-compose up -d
           
       - name: Migrations
