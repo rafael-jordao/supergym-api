@@ -31,7 +31,6 @@ class UserService {
     }
 
     const user = await UserRepository.create({ name, email, password });
-    console.log(user);
 
     return user;
   }
