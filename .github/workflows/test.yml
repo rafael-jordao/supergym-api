@@ -35,11 +35,12 @@ jobs:
           docker-compose exec -it app sh -c "yarn prisma migrate dev"
 
       - name: Test
+        env:
+          CI: true
         run: |
           docker-compose exec -it app sh -c "yarn test"
         
-        env:
-        CI: true
+        
 
       - name: Stop services
         run: docker-compose down
