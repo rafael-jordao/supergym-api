@@ -15,31 +15,29 @@ afterAll(async () => {
   await prisma.$disconnect();
 });
 
-describe('/users', () => {
-  it('Should be able to create a new user', async () => {
+describe('/auth', () => {
+  it('Should be able to authenticate user', async () => {
     const payload = {
-      'name': 'test5',
-      'email': 'test5@user.com',
-      'password': 'password'
-    };
-
-    const res = await request(app)
-      .post('/users')
-      .send(payload);
-
-    expect(res.status).toBe(201);
-
-  });
-
-  it('Should not be able to create a new user', async () => {
-    const payload = {
-      'name': 'test',
       'email': 'test1@user.com',
       'password': 'password'
     };
 
     const res = await request(app)
-      .post('/users')
+      .post('/auth')
+      .send(payload);
+
+    expect(res.status).toBe(200);
+
+  });
+
+  it('Should not be able to authenticate a userr', async () => {
+    const payload = {
+      'email': 'test1@user.com',
+      'password': 'wrongpassword'
+    };
+
+    const res = await request(app)
+      .post('/auth')
       .send(payload);
 
     expect(res.status).toBe(500);
