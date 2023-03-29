@@ -24,15 +24,15 @@ jobs:
       - name: Install dependencies
         run:  yarn install
 
-      - name: Create Migrations
-        run:  yarn prisma migrate dev
-
       - name: Run containers
         run:  docker compose up
 
-      - name: Test
+      - name: Sync database
         run: |
-          docker-compose exec -it app sh -c "yarn test"
+          docker-compose exec -it app sh -c "yarn prisma migrate dev"
+
+      - name: Test
+        run: yarn test
  
         env:
           CI: true
