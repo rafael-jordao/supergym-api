@@ -22,27 +22,29 @@ jobs:
           node-version: 14.x
 
       - name: Install dependencies
-        run:  yarn install
+        run: yarn install
 
-      - name: BinaryTargets Prisma
-        run: yarn prisma generate
-
-      - name: Run containers
-        run:  docker compose up
-
-      - name: Sync database
-        run: |
-          docker-compose exec -it app sh -c "yarn prisma migrate dev"
-
-      - name: Test
-        run: yarn test
- 
+      - name: Migrate database
         env:
-          CI: true
           POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
           POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
           POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: |
+          docker-compose up -d
+          docker-compose exec -it app sh -c "yarn prisma migrate dev"
+
+      - name: Test
+        run: |
+          docker-compose exec -it app sh -c "yarn test"
+        
+        env:
+        CI: true
 
       - name: Stop services
         run: docker-compose down
+
+
+
+
+      
