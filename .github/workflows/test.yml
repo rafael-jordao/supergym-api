@@ -25,12 +25,10 @@ jobs:
       - name: Creat .env file
         uses: actions/create-file@v1
         with:
-        path: .env
-          content: |
-            POSTGRES_USER=${{ secrets.POSTGRES_USER }}
-            POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}
-            POSTGRES_DB=${{ secrets.POSTGRES_DB }}
-            DATABASE_URL=postgresql://$POSTGRES_USER:$POSTGRES_PASSWORD@$POSTGRES_HOST:$5432/supergym_db?schema=public  
+            POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+            POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+            POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
+            DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
       - name: Install dependencies
         run: yarn install
