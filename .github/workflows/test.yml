@@ -32,13 +32,13 @@ jobs:
           DATABASE_URL: postgresql://postgres:password@supergym_db:5432/supergym_db?schema=public
         run: |
           docker-compose up -d
-          docker-compose exec -it app sh -c "yarn prisma migrate dev"
+          docker-compose exec -it app sh -c yarn prisma migrate dev
 
       - name: Test
         env:
           CI: true
         run: |
-          docker-compose exec -it app sh -c "yarn test"
+          docker-compose exec -it app sh -c yarn test
         
       - name: Containers logs
         run: docker-compose logs
