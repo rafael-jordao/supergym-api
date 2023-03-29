@@ -32,6 +32,9 @@ jobs:
           docker-compose exec -it app sh -c "yarn test"
         env:
           CI: true
+          DB_HOST: supergym_db
+          DB_USER: postgres
+          DB_PASSWORD: password
 
       - name: Stop services
         run: docker-compose down
