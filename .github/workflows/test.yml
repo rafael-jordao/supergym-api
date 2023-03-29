@@ -24,6 +24,9 @@ jobs:
       - name: Install dependencies
         run:  yarn install
 
+      - name: BinaryTargets Prisma
+        run: yanr prisma generate
+
       - name: Run containers
         run:  docker compose up
 
