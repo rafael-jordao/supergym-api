@@ -4,14 +4,15 @@ import { randomUUID } from 'crypto';
 import UserRepository from '../../../src/app/repositories/UserRepository';
 import { prisma } from '../../../src/database/prismaClient';
 
-// interface RequestTypes {
-//   id: string;
-//   name: string;
-//   email: string;
-//   password: string;
-//   created_at: Date;
-//   updated_at: Date
-// }
+import bcrypt from 'bcryptjs';
+
+interface RequestTypes {
+
+  name: string;
+  email: string;
+  password: string;
+
+}
 
 jest.mock('../../../src/database/prismaClient', () => ({
   __esModule: true,
@@ -70,6 +71,48 @@ describe('UserRepository', () => {
 
     expect(prismaMock.user.findUnique).toHaveBeenCalled();
     expect(result).toEqual(users[0]);
+  });
+
+  it('should find an user by email', async () => {
+    const email = users[0].email;
+    const user = users.find(user => user.email === email);
+
+    if (user) {
+      prismaMock.user.findUnique.mockResolvedValue(user);
+    } else {
+      prismaMock.user.findUnique.mockResolvedValue(null);
+    }
+
+    const result = await userRepository.findByEmail(email);
+
+    expect(prismaMock.user.findUnique).toHaveBeenCalled();
+    expect(result).toEqual(users[0]);
+  });
+
+  it('should create a new user', async () => {
+
+    const newUser: RequestTypes = {
+      name: 'John Doe',
+      email: 'johndoe@example.com',
+      password: '123456',
+    };
+
+    const createdUser = {
+      id: randomUUID().toString(),
+      name: newUser.name,
+      email: newUser.email,
+      password: bcrypt.hashSync(newUser.password, 8),
+      created_at: new Date(),
+      updated_at: new Date()
+    };
+
+
+    prismaMock.user.create.mockResolvedValue(createdUser);
+
+    const result = await userRepository.create(newUser);
+
+    expect(prismaMock.user.create).toHaveBeenCalled();
+    expect(result).toEqual(createdUser);
   });
 
 });
