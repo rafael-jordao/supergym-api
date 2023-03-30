@@ -18,9 +18,9 @@ afterAll(async () => {
 describe('/users', () => {
   it('Should be able to create a new user', async () => {
     const payload = {
-      'name': 'test5',
-      'email': 'test5@user.com',
-      'password': 'password'
+      name: 'John Doe',
+      email: 'john4@user.com',
+      password: 'password'
     };
 
     const res = await request(app)
@@ -33,9 +33,9 @@ describe('/users', () => {
 
   it('Should not be able to create a new user', async () => {
     const payload = {
-      'name': 'test',
-      'email': 'test5@user.com',
-      'password': 'password'
+      name: 'Another John',
+      email: 'john2@user.com',
+      password: 'password'
     };
 
     const res = await request(app)
