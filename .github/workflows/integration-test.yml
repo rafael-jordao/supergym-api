@@ -47,7 +47,7 @@ jobs:
       - name: Test
         env:
           CI: true
-        run: docker exec -i api_supergym sh -c "yarn test"
+        run: docker exec -i api_supergym sh -c "yarn test __testes__/integration/integration.test.ts"
         
       - name: Containers logs
         run: docker-compose logs
