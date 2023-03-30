@@ -1,5 +1,5 @@
-import UserService from '../../src/app/services/UserService';
-import UserRepository from '../../src/app/repositories/UserRepository';
+import UserService from '../../../src/app/services/UserService';
+import UserRepository from '../../../src/app/repositories/UserRepository';
 import { User } from '@prisma/client';
 import { randomUUID } from 'crypto';
 
@@ -13,7 +13,7 @@ interface UserRequest {
 }
 
 // Criar um mock do UserRepository
-jest.mock('../../src/app/repositories/UserRepository');
+jest.mock('../../../src/app/repositories/UserRepository');
 
 const mockedFindAll = UserRepository.findAll as jest.MockedFunction<typeof UserRepository.findAll>;
 const mockFindByEmail = UserRepository.findByEmail as jest.MockedFunction<typeof UserRepository.findByEmail>;
