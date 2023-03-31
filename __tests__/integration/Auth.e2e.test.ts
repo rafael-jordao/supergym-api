@@ -2,6 +2,7 @@ import request from 'supertest';
 import app from '../../src/app';
 import { prisma } from '../../src/database/prismaClient';
 
+
 beforeAll(async () => {
   try {
     prisma.$connect();
@@ -25,6 +26,10 @@ describe('/auth', () => {
     const res = await request(app)
       .post('/auth')
       .send(payload);
+
+    const token = res.body.user.token;
+
+    console.log(token);
 
     expect(res.status).toBe(200);
 
