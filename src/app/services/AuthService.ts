@@ -1,6 +1,7 @@
 import UserRepository from '../repositories/UserRepository';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import { ApiError } from '../helpers/apiError';
 
 interface AuthRequestTypes {
   email: string;
@@ -12,13 +13,13 @@ class AuthService {
     const user = await UserRepository.findByEmail(email);
 
     if (!user) {
-      throw new Error('Unauthorized. 🧐');
+      throw new ApiError(403, 'Unauthorized. 🧐');
     }
 
     const isValidPassword = await bcrypt.compare(password, user.password);
 
     if (!isValidPassword) {
-      throw new Error('Unauthorized. 🧐');
+      throw new ApiError(403, 'Unauthorized. 🧐');
     }
 
     const token = jwt.sign({ id: user.id }, 'secret', {
