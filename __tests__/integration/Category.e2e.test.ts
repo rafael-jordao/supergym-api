@@ -110,7 +110,8 @@ describe('/categories', () => {
 
     expect(res.status).toBe(500);
     expect(res.body).toMatchObject({
-      error: 'Theres no exercises registred in this category. 🔎'
+      'success': false,
+      'message': 'Theres no categories registred. 🔎'
     });
   });
 

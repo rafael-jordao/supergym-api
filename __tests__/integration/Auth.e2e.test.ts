@@ -45,7 +45,7 @@ describe('/auth', () => {
       .post('/auth')
       .send(payload);
 
-    expect(res.status).toBe(500);
+    expect(res.status).toBe(403);
 
   });
 
