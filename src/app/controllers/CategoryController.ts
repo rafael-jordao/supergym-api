@@ -6,7 +6,7 @@ class CategoryController {
     try {
       const categories = await CategoryService.getAllCategories();
 
-      return res.json(categories);
+      return res.status(200).json(categories);
     } catch (error) {
       next(error);
     }
@@ -29,7 +29,7 @@ class CategoryController {
 
       const category = await CategoryService.createCategory({ name, icon });
 
-      return res.json(category);
+      return res.status(201).json(category);
     } catch (error) {
       next(error);
     }

@@ -42,7 +42,7 @@ describe('/users', () => {
       .post('/users')
       .send(payload);
 
-    expect(res.status).toBe(500);
+    expect(res.status).toBe(409);
 
   });
 
