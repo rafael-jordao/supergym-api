@@ -38,7 +38,7 @@ describe('/categories', () => {
       .set('Authorization', `Bearer  ${token}`)
       .send(payload);
 
-    expect(res.status).toBe(200);
+    expect(res.status).toBe(201);
   });
 
   it('should not be able to create a new category', async () => {
@@ -108,10 +108,10 @@ describe('/categories', () => {
       .get(`/categories/${categoryId}/exercises`)
       .set('Authorization', `Bearer  ${token}`);
 
-    expect(res.status).toBe(500);
+    expect(res.status).toBe(404);
     expect(res.body).toMatchObject({
       'success': false,
-      'message': 'Theres no categories registred. 🔎'
+      'message': 'Theres no exercises registred in this category. 🔎'
     });
   });
 

@@ -1,3 +1,4 @@
+import { ApiError } from '../helpers/apiError';
 import TrainingRepository from '../repositories/TrainingRepository';
 import { Exercise } from '@prisma/client';
 
@@ -13,7 +14,7 @@ class TrainingService {
     const trainings = await TrainingRepository.findAllCreatedByUser(userId);
 
     if (trainings?.length === 0) {
-      throw new Error('Theres no trainings registred 🔎.');
+      throw new ApiError(404, 'Theres no trainings registred 🔎.');
     }
 
     return trainings;
@@ -22,15 +23,15 @@ class TrainingService {
   async createTraining({ clientName, exercises, userId }: RequestTypes) {
 
     if (!clientName) {
-      throw new Error('Must define clientName 🧐');
+      throw new ApiError(422, 'Must define clientName 🧐');
     }
 
     if (exercises.length === 0) {
-      throw new Error('Must have at least 1 exercise 🧐');
+      throw new ApiError(422, 'Must have at least 1 exercise 🧐');
     }
 
     if (!userId) {
-      throw new Error('Must define the userId 🧐');
+      throw new ApiError(422, 'Must define the userId 🧐');
     }
 
     const training = await TrainingRepository.create({ clientName, exercises, userId });

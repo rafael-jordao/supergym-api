@@ -1,3 +1,4 @@
+import { ApiError } from '../helpers/apiError';
 import CategoryRepository from '../repositories/CategoryRepository';
 import ExerciseRespository from '../repositories/ExerciseRespository';
 
@@ -11,7 +12,7 @@ class CategoryService {
     const categories = await CategoryRepository.findAll();
 
     if (categories.length === 0) {
-      throw new Error('Theres no categories registred. 🔎');
+      throw new ApiError(404, 'Theres no categories registred. 🔎');
     }
 
     return categories;
@@ -21,7 +22,7 @@ class CategoryService {
     const exercises = await ExerciseRespository.findByCategory(categoryId);
 
     if (exercises.length === 0) {
-      throw new Error('Theres no exercises registred in this category. 🔎');
+      throw new ApiError(404, 'Theres no exercises registred in this category. 🔎');
     }
 
     return exercises;
@@ -31,7 +32,7 @@ class CategoryService {
     const { name, icon } = categoryRequest;
 
     if (!name || !icon) {
-      throw new Error('All fields must be filled 🧐');
+      throw new ApiError(422, 'All fields must be filled 🧐');
     }
 
     const category = await CategoryRepository.create({ name, icon });
@@ -43,7 +44,7 @@ class CategoryService {
     const categoryExists = await CategoryRepository.findById(id);
 
     if (!categoryExists) {
-      throw new Error('This category doesn\'t exist. 😕');
+      throw new ApiError(404, 'This category doesn\'t exist. 😕');
     }
 
     await CategoryRepository.delete(id);

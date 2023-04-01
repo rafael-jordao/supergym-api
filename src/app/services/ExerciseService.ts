@@ -1,3 +1,4 @@
+import { ApiError } from '../helpers/apiError';
 import CategoryRepository from '../repositories/CategoryRepository';
 import ExerciseRespository from '../repositories/ExerciseRespository';
 
@@ -18,7 +19,7 @@ class ExerciseService {
     const exercises = await ExerciseRespository.findByUser(userId);
 
     if (!exercises) {
-      throw new Error('Theres no exercises registred 🔎');
+      throw new ApiError(404, 'Theres no exercises registred 🔎');
     }
 
     return exercises;
@@ -29,15 +30,15 @@ class ExerciseService {
     const categoryExists = await CategoryRepository.findById(categoryId);
 
     if (!categoryExists) {
-      throw new Error('This category doesn\'t exist. 🔎');
+      throw new ApiError(404, 'This category doesn\'t exist. 🔎');
     }
 
     if (!name) {
-      throw new Error('Required name. ✍️');
+      throw new ApiError(422, 'Required name. ✍️');
     }
 
     if (!userId) {
-      throw new Error('Required userId 🧐');
+      throw new ApiError(422, 'Required userId 🧐');
     }
 
     const exercise = await ExerciseRespository.create({ name, description, instructions, series, waitTime, imagePath, categoryId, userId });
