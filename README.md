@@ -102,6 +102,28 @@ exercises_userId_fkey | Restrição de chave estrangeira que relaciona a coluna 
 _trainings_A_fkey | Restrição de chave estrangeira que relaciona a coluna A na tabela _trainings com a coluna id na tabela exercises
 _trainings_B_fkey | Restrição de chave estrangeira que relaciona a coluna B na tabela _trainings com a coluna id na tabela trainings
 
+## Prisma - ORM ▲
+
+Estamos utilizando o [Prisma](https://www.prisma.io/), um ORM (Object-Relational Mapping) moderno e poderoso que facilita a interação entre aplicativos e bancos de dados. Com ele, é possível escrever consultas seguras e tipadas em linguagens de programação populares, como TypeScript e JavaScript, e mapear as entidades do banco de dados para objetos em sua aplicação. 
+
+O Prisma também oferece recursos avançados, como migrações de banco de dados, gerenciamento de transações e uma CLI (Command Line Interface) amigável para facilitar o desenvolvimento. Ele suporta uma variedade de bancos de dados, incluindo PostgreSQL, MySQL e SQLite
+
+####Vantagens do Prisma em relação a outros ORMs TypeScript:
+
+ 1. **Performance:** o Prisma utiliza o protocolo binário do banco de dados para comunicação direta e otimizada com o banco de dados, o que o torna mais rápido do que outros ORMs.
+
+2. **Type-safety:** o Prisma é totalmente type-safe, o que significa que o TypeScript pode detectar erros de tipo antes mesmo de você executar seu código. Isso ajuda a evitar erros comuns que ocorrem com outros ORMs.
+
+  3. **CLI poderosa:** o Prisma possui uma CLI fácil de usar, que facilita a configuração e a migração do banco de dados, além de gerar código TypeScript automaticamente.
+
+####Desvantagens do Prisma em relação a outros ORMs TypeScript:
+
+  1. **Documentação em evolução:** como o Prisma é relativamente novo, sua documentação ainda está evoluindo e pode ser um pouco escassa em alguns pontos.
+
+  2. **Menos flexível:** o Prisma foi projetado para trabalhar com bancos de dados específicos (por exemplo, MySQL, PostgreSQL), o que significa que pode ser menos flexível do que outros ORMs que suportam vários bancos de dados.
+
+  3. **Curva de aprendizado:** o Prisma tem sua própria sintaxe e maneira de fazer as coisas, o que pode levar algum tempo para se acostumar.
+
 ## Design da Arquitetura ✍️
 
 O design de arquitetura Data Mapper é utilizado nesta aplicação para separar as preocupações em diferentes camadas: **repositories, services e controllers.**
@@ -123,7 +145,7 @@ Estamos utilizando rotas HTTP na aplicação que possuem um middleware de **aute
 > Já o errorHandler trata e transforma erros em uma resposta padronizada, utilizando a classe personalizada ApiError, que contém informações como o status e mensagem de erro. 
 
 
-### Endpoints
+### Endpoints 🚏
 
 | Endpoints | Métodos | Descrição | Autenticação
 |---|---|---| ---|
@@ -141,7 +163,7 @@ Estamos utilizando rotas HTTP na aplicação que possuem um middleware de **aute
 | /trainings:id| DELETE | Deleta um treino específico| Sim |
 
 
-## Testes
+## Testes 🔎
 
 Para garantir a qualidade do código e do desenvolvimento da aplicação utilizaremos testes unitários e testes de integração. 
 
@@ -192,3 +214,17 @@ Para isso, execute:
 ```bash
 yarn test unit
 ```
+
+## CI/CD 🤖
+
+O repositório está configurando para executar os testes de forma automatizada **sempre que uma nova pull request for feita na branch develop e na branch main, ou um push na branch main**. 
+
+O workflow pode ser conferido no diretório: [.github/worflows](.github/workflows/).
+
+A parte do deploy ainda não foi feita, pois ainda estamos na fase de desenvolvimento.
+
+## Considerações finais 👋
+
+Decidi colocar em prática todos os meus conhecimentos adquiridos com meus estudos. Se você encontrou algum erro ou tem alguma ideia de melhoria, fique à vontade para dar sugestões. 
+
+Obrigado! 😁
