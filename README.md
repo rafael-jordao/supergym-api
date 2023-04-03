@@ -48,10 +48,13 @@ docker exec -it api_supergym bash
 
 Com o comando acima entramos no nosso container para executar as migrations do nosso banco de dados.
 
+> Uma forma mais simples de acessar os containers é indo no seu Docker Desktop e executar os comandos direto no Terminal do container.
+
+Executando migrations:
+
 ```bash
 yarn prisma migrate dev
 ```
-
 
 Dessa forma as migrations serão executadas e o nosso banco de dados estará pronto.
 
@@ -105,3 +108,54 @@ Estamos utilizando rotas HTTP na aplicação que possuem um middleware de **aute
 | /trainings:id| DELETE | Deleta um treino específico| Sim |
 
 
+## Testes
+
+Para garantir a qualidade do código e do desenvolvimento da aplicação utilizaremos testes unitários e testes de integração. 
+
+>Testes unitários não podem garantir a integridade do sistema como um todo, e os testes E2E são essenciais para validar o fluxo completo da aplicação.
+
+#### Testes Unitários
+
+Os testes unitários são utilizados para testar as funcionalidades isoladas do código, ou seja, testar as funções ou métodos de uma classe separadamente. Isso permite encontrar e corrigir problemas mais cedo no processo de desenvolvimento, facilitando a manutenção do código e diminuindo o risco de bugs em produção.
+
+#### Testes E2E
+
+Testes E2E (End-to-End) são usados para verificar o comportamento completo da aplicação, desde a entrada de uma requisição até a resposta final. Eles garantem que as várias partes do sistema estejam integradas e funcionando corretamente, incluindo rotas, autenticação, banco de dados e outras dependências. 
+
+Os testes E2E devem ser executados em um ambiente semelhante ao de produção e simulam o uso real da aplicação pelo usuário final. Eles podem ser implementados usando ferramentas como o Supertest para o Node.js e o Selenium para navegadores web.
+
+### Executando os testes 
+
+Os testes estão na pasta raiz do repositório [__tests__](./__tests__/). Separamos em 2 pastas para manter a organização: [integration](./__tests__/integration) e [unit](./__tests__/unit/).
+
+##### Testes E2E
+
+Para executar os testes de integração garanta que a aplicação esteja em execução. 
+
+Precisamos entrar no nosso container para executar o teste.
+
+```bash
+docker exec -it api_supergym sh
+```
+
+Em seguida execute:
+
+```bash
+yarn test __tests__/integration/integration.test.ts
+```
+
+Perceba que estamos executando um arquivo específico dentro da nossa pasta [integration](./__tests__/integration/). 
+
+Isso ocorre pois os nossos testes são interdependentes e precisam ser executados em uma ordem específica. 
+
+Por exemplo: como vamos testar a rota de autenticação sem criar o usuário antes? E assim por diante.
+
+##### Testes Unitários
+
+Já os testes unitários não precisam nem ter a aplicação em execução e nem precisam ser executados dentro dos containers, pois o propósito deles é testar cada funcionalidade de forma isolada, sem dependências externas.
+
+Para isso, execute:
+
+```bash
+yarn test unit
+```
