@@ -1,6 +1,6 @@
 #  Supergym - API 💪
 
-API desenvolvida para um app que possibilita a criação de treinos personalizados por personais trainers, e a facilidade de envio para os seus clientes.
+API desenvolvida para um app que possibilita a criação de treinos personalizados por personais trainers, assim facilitando o envio para os seus clientes.
 
 ##  Docker 🐳
 
@@ -69,7 +69,40 @@ trainings | Tabela responsável por armazenar as informações dos treinos criad
 exercises | Tabela responsável por armazenar as informações dos exercícios disponíveis, incluindo nome, descrição, instruções, séries, tempo de descanso, caminho da imagem e categoria correspondente.
 _trainings | Tabela de relacionamento entre exercícios e treinos, indicando quais exercícios fazem parte de cada treino.
 
-### Design da Arquitetura ✍️
+#### Relacionamentos
+
+Tabela   | Relacionamento
+--------- | ------
+users| 1 para N com trainings, 1 para N com exercises
+categories | 1 para N com exercises
+trainings | 1 para N com _trainings, N para 1 com users
+exercises | 1 para N com _trainings, N para 1 com categories, N para 1 com users
+_trainings | N para 1 com exercises, N para 1 com trainings
+
+#### Entidades e Atributos
+
+Entidade   | Atributos
+--------- | ------
+users| id, name, email, password, created_at, updated_at
+categories | id, name, icon
+trainings | id, clientName, userId
+exercises | id, name, description, instructions, series, waitTime, imagePath, categoryId, userId
+_trainings | A, B
+
+#### Restrições 
+
+Relacionamento   | Descrição
+--------- | ------
+users_email_key	| Restrição de chave única que impede emails duplicados na tabela users
+_trainings_AB_unique | Restrição de chave única que impede a duplicação da combinação de valores em A e B na tabela _trainings
+_trainings_B_index | 	Índice que otimiza a pesquisa de registros na coluna B na tabela _trainings
+trainings_userId_fkey	 | Restrição de chave estrangeira que relaciona a coluna userId na tabela trainings com a coluna id na tabela users
+exercises_categoryId_fkey | Restrição de chave estrangeira que relaciona a coluna categoryId na tabela exercises com a coluna id na tabela categories
+exercises_userId_fkey | Restrição de chave estrangeira que relaciona a coluna userId na tabela exercises com a coluna id na tabela users
+_trainings_A_fkey | Restrição de chave estrangeira que relaciona a coluna A na tabela _trainings com a coluna id na tabela exercises
+_trainings_B_fkey | Restrição de chave estrangeira que relaciona a coluna B na tabela _trainings com a coluna id na tabela trainings
+
+## Design da Arquitetura ✍️
 
 O design de arquitetura Data Mapper é utilizado nesta aplicação para separar as preocupações em diferentes camadas: **repositories, services e controllers.**
 
@@ -90,7 +123,7 @@ Estamos utilizando rotas HTTP na aplicação que possuem um middleware de **aute
 > Já o errorHandler trata e transforma erros em uma resposta padronizada, utilizando a classe personalizada ApiError, que contém informações como o status e mensagem de erro. 
 
 
-#### Endpoints
+### Endpoints
 
 | Endpoints | Métodos | Descrição | Autenticação
 |---|---|---| ---|
@@ -101,7 +134,7 @@ Estamos utilizando rotas HTTP na aplicação que possuem um middleware de **aute
 | /categories/:exerciseId/exercises | GET | Retorna exercícios de apenas uma categoria | Sim |
 | /categories| PUT | Atualiza uma categoria específica | Sim |
 | /categories| DELETE | Deleta uma categoria específica | Sim |
-| /trainings:id| POST | Cria um novo treino| Sim |
+| /trainings| POST | Cria um novo treino| Sim |
 | /trainings:userId| GET | Retorna uma lista de treinos disponíveis criados por um usuário| Sim |
 | /trainings:id| GET | Retorna detalhes de um treino específico| Sim |
 | /trainings:id| PUT | Atualiza um treino específico| Sim |
