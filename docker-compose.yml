@@ -4,9 +4,6 @@ services:
   app:
     build:
       context: .
-      args:
-        - POSTGRES_HOST=supergym_db
-        - POSTGRES_PWD=password
     container_name: api_supergym
     command: yarn dev
     ports:
