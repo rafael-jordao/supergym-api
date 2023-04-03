@@ -108,7 +108,7 @@ Estamos utilizando o [Prisma](https://www.prisma.io/), um ORM (Object-Relational
 
 O Prisma também oferece recursos avançados, como migrações de banco de dados, gerenciamento de transações e uma CLI (Command Line Interface) amigável para facilitar o desenvolvimento. Ele suporta uma variedade de bancos de dados, incluindo PostgreSQL, MySQL e SQLite
 
-####Vantagens do Prisma em relação a outros ORMs TypeScript:
+#### Vantagens do Prisma em relação a outros ORMs TypeScript:
 
  1. **Performance:** o Prisma utiliza o protocolo binário do banco de dados para comunicação direta e otimizada com o banco de dados, o que o torna mais rápido do que outros ORMs.
 
@@ -116,7 +116,7 @@ O Prisma também oferece recursos avançados, como migrações de banco de dados
 
   3. **CLI poderosa:** o Prisma possui uma CLI fácil de usar, que facilita a configuração e a migração do banco de dados, além de gerar código TypeScript automaticamente.
 
-####Desvantagens do Prisma em relação a outros ORMs TypeScript:
+#### Desvantagens do Prisma em relação a outros ORMs TypeScript:
 
   1. **Documentação em evolução:** como o Prisma é relativamente novo, sua documentação ainda está evoluindo e pode ser um pouco escassa em alguns pontos.
 
