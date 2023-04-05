@@ -43,7 +43,7 @@ Precisamos entrar no container do nosso servidor para executar as migrations e a
 Para isso executaremos o comando:
 
 ```bash
-docker exec -it api_supergym bash
+docker exec -it api_supergym sh
 ```
 
 Com o comando acima entramos no nosso container para executar as migrations do nosso banco de dados.
