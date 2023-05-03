@@ -7,6 +7,11 @@ interface UserRequest {
   password: string;
 }
 
+interface UserUpdatePassowrdRequesTypes {
+  email: string;
+  password: string;
+}
+
 class UserService {
   async getAllUsers() {
     const users = await UserRepository.findAll();
@@ -32,6 +37,24 @@ class UserService {
     }
 
     const user = await UserRepository.create({ name, email, password });
+
+    return user;
+  }
+
+  async updateUserPassword(userRequest: UserUpdatePassowrdRequesTypes) {
+    const { email, password } = userRequest;
+
+    const userExists = await UserRepository.findByEmail(email);
+
+    if (!userExists) {
+      throw new ApiError(409, 'User not found 🧐');
+    }
+
+    if (!email || !password) {
+      throw new ApiError(422, 'All fields must be filled 🧐');
+    }
+
+    const user = await UserRepository.updatePassword({ email, password });
 
     return user;
   }

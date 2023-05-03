@@ -8,6 +8,11 @@ interface RequestTypes {
   password: string;
 }
 
+interface UpdatePassordRequesTypes {
+  email: string;
+  password: string
+}
+
 class UserRepository {
 
   async findAll() {
@@ -47,6 +52,22 @@ class UserRepository {
       }
     });
 
+    return user;
+  }
+
+  async updatePassword({ email, password }: UpdatePassordRequesTypes) {
+    password = bcrypt.hashSync(password, 8);
+
+    console.log(password);
+
+    const user = await prisma.user.update({
+      where: {
+        email: email,
+      },
+      data: {
+        password: password,
+      },
+    });
     return user;
   }
 

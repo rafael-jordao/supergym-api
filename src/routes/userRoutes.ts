@@ -7,5 +7,6 @@ const router = Router();
 
 router.get('/', authMiddleware, UserController.index);
 router.post('/', errorHandler, UserController.store);
+router.put('/', errorHandler, UserController.updatePassword);
 
 export default router;

@@ -25,6 +25,25 @@ class UserController {
       next(error);
     }
   }
+
+  async updatePassword(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { email, password } = req.body;
+
+
+      const user = await UserService.updateUserPassword({ email, password });
+
+      const jsonUser = JSON.stringify(user);
+
+      console.log(jsonUser);
+
+      return res.status(204).json(user);
+
+
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 export default new UserController();
