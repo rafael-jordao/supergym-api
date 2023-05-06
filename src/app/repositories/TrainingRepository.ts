@@ -37,6 +37,17 @@ class TrainingRepository {
     return null;
   }
 
+  async findById(id: string) {
+    const training = await prisma.training.findUnique({
+      where: {
+        id: id
+      },
+      include: { exercises: true }
+    });
+
+    return training;
+  }
+
   async create({ clientName, exercises, userId }: RequestTypes) {
     const training = await prisma.training.create({
       data: {
