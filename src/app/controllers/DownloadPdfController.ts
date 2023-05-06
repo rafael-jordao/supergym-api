@@ -14,8 +14,8 @@ class DownloadPdfController {
 
       if (!training) {
         return new ApiError(404, 'Training not found');
-
       }
+
       const mapExercises = training.exercises.map((exercise) => {
         return `
           <div style="width:max-width: 800px; margin: 0 auto;">
