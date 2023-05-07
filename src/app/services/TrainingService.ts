@@ -38,6 +38,15 @@ class TrainingService {
 
     return training;
   }
+
+  async getTrainingById(id: string) {
+    if (!id) {
+      throw new ApiError(422, 'Must define the id');
+    }
+    const training = await TrainingRepository.findById(id);
+
+    return training;
+  }
 }
 
 export default new TrainingService();

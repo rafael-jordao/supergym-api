@@ -17,10 +17,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Use Node.js 14.x
+      - name: Use Node.js 16.x
         uses: actions/setup-node@v2.4.0
         with:
-          node-version: 14.x
+          node-version: 16.x
 
       - name: Creat .env file
         uses: ozaytsev86/create-env-file@v1

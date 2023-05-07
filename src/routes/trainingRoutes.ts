@@ -4,7 +4,8 @@ import TrainingController from '../app/controllers/TrainingController';
 
 const router = Router();
 
-router.get('/:userId', authMiddleware, TrainingController.index);
+router.get('/user/:userId', authMiddleware, TrainingController.index);
+router.get('/:id', authMiddleware, TrainingController.getTrainingById);
 router.post('/', authMiddleware, TrainingController.store);
 
 export default router;

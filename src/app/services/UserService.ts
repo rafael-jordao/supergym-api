@@ -29,11 +29,11 @@ class UserService {
     const userExists = await UserRepository.findByEmail(email);
 
     if (userExists) {
-      throw new ApiError(409, 'This e-mail is already in use 😕');
+      throw new ApiError(409, 'Este e-mail já está em uso. 😕');
     }
 
     if (!name || !email || !password) {
-      throw new ApiError(422, 'All fields must be filled 🧐');
+      throw new ApiError(422, 'Preencha todos os campos e tente novamente. 🧐');
     }
 
     const user = await UserRepository.create({ name, email, password });
@@ -47,7 +47,7 @@ class UserService {
     const userExists = await UserRepository.findByEmail(email);
 
     if (!userExists) {
-      throw new ApiError(409, 'User not found 🧐');
+      throw new ApiError(409, 'Usuário não encontrado. 🧐');
     }
 
     if (!email || !password) {

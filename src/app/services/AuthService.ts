@@ -13,13 +13,13 @@ class AuthService {
     const user = await UserRepository.findByEmail(email);
 
     if (!user) {
-      throw new ApiError(401, 'Unauthorized. 🧐');
+      throw new ApiError(404, 'Usuário não encontrado. 🧐');
     }
 
     const isValidPassword = await bcrypt.compare(password, user.password);
 
     if (!isValidPassword) {
-      throw new ApiError(401, 'Unauthorized. 🧐');
+      throw new ApiError(401, 'Senha inválida. 🧐');
     }
 
     const token = jwt.sign({ id: user.id }, 'secret', {
