@@ -96,7 +96,7 @@ describe('UserService', () => {
     } : null);
 
     const userService = UserService;
-    const error = new Error('This e-mail is already in use 😕');
+    const error = new Error('Este e-mail já está em uso. 😕');
     await expect(userService.createUser(user)).rejects.toThrowError(error);
   });
 
